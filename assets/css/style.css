@@ -613,7 +613,7 @@ h6 {
   background-color: #fff;
 }
 
-@media (min-width: 424px){
+@media (min-width: 319px){
   .sidebar{
     overflow: auto;
   }
