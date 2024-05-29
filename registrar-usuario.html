@@ -109,11 +109,10 @@
 
 
                     <div class="col-12">
-
                       <button v-on:click="addAlumno()" class="btn btn-primary w-100">Create Account</button>
                     </div>
                     <div class="col-12">
-                      <p class="small mb-0">Already have an account? <a href="pages-login.html">Log in</a></p>
+                      <p class="small mb-0">Already have an account? <a href="login.html">Log in</a></p>
                     </div>
                     </form>
 
@@ -160,9 +159,7 @@
       contraseña: '',
       grupo: '',
       equipo: ''
-
     },
-
     methods: {
       addAlumno: function () {
         let info = {
@@ -178,13 +175,15 @@
         }
         axios.post('https://localhost:7070/api/Alumno', info)
           .then(function (response) {
+            setTimeout(() => {
+            window.location.href = 'index.html';
+          }, 2000);
             console.log(response);
           })
           .catch(function (error) {
             console.log(error);
           });
       }
-
     }
   })
 </script>
