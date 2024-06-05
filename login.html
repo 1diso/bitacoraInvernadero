@@ -33,7 +33,6 @@
 </head>
 
 <body>
-
   <main>
     <div class="container">
       <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
@@ -50,9 +49,9 @@
                 <div class="card-body" id="app">
                   <div class="pt-4 pb-2">
                     <h5 class="card-title text-center pb-0 fs-4">Ingresar</h5>
-                    <p class="text-center small">Ingresa tú usuario y contraseña para entrar</p>
+                    <p class="text-center small">Ingresa tu usuario y contraseña para entrar</p>
                   </div>
-                  <form id="loginForm" class="row g-3 needs-validation" novalidate>
+                  <form id="loginForm" class="row g-3 needs-validation" novalidate @submit.prevent="verificarLogin">
                     <div class="col-12">
                       <label for="numeroControl" class="form-label">Num. Control</label>
                       <div class="input-group has-validation">
@@ -62,7 +61,7 @@
                     </div>
                     <div class="col-12">
                       <label for="contraseña" class="form-label">Contraseña</label>
-                      <input type="password" v-model="Contraseña" class="form-control" id="contraseña" required>
+                      <input type="password" v-model="contraseña" class="form-control" id="contraseña" required>
                       <div class="invalid-feedback">Por favor, ingresa tu contraseña.</div>
                     </div>
                     <div class="col-12">
@@ -72,13 +71,13 @@
                       </div>
                     </div>
                     <div class="col-12">
-                      <button v-on:click="addAlumno()" class="btn btn-primary w-100">Entrar</button>
+                      <button type="submit" class="btn btn-primary w-100">Entrar</button>
                     </div>
                     <div class="col-12">
-                      <p class="small mb-0">¿No tienes acceso? <a href="pages-register.html">Darse de alta</a></p>
+                      <p class="small mb-0">¿No tienes acceso? <a href="registrar-usuario.html">Darse de alta</a></p>
                     </div>
                     <div class="col-12">
-                      <p id="message" class="small mb-0"></p>
+                      <p id="message" class="small mb-0" :class="{'text-danger': mensajeIncorrecto, 'text-success': !mensajeIncorrecto}">{{ mensaje }}</p>
                     </div>
                   </form>
                 </div>
@@ -105,39 +104,39 @@
       el: '#app',
       data: {
         numeroControl: '',
-        Contraseña: ''
-
+        contraseña: '',
+        mensaje: '',
+        mensajeIncorrecto: false,
+        alumnos: []
       },
       methods: {
-
-        
-        addAlumno: async function () {
+        async fetchData() {
           try {
-            // Crea un objeto con los datos del alumno
-            let info = {
-              "numeroControl": this.numeroControl,
-              "Contraseña": this.Contraseña
-            };
-
-            // Realiza la solicitud al endpoint para iniciar sesión
-            const response = await axios.post('https://localhost:7070/api/Alumno/login', info);
-
-            // Maneja la respuesta del servidor
-          if(response.ok){
+            const response = await axios.get('https://localhost:7070/api/Alumno/22360923');
+            this.alumnos = response.data;
+          } catch (error) {
+            console.error('Error fetching data:', error);
+          }
+        },
+        async verificarLogin() {
+          await this.fetchData();
+          if (this.alumnos.numeroControl == this.numeroControl && this.alumnos.contraseña == this.contraseña) {
+            this.mensaje = 'Login correcto. Bienvenido!';
+            this.mensajeIncorrecto = false;
             setTimeout(() => {
               window.location.href = 'index.html';
-            }, 2000);
-          }
-
-            // Redirige a la página index.html después de un inicio de sesión exitoso
-             // Espera 2 segundos antes de redirigir
-          } catch (error) {
-            // Maneja los errores
-            console.log(error);
+            }, 1000);
+          } else {
+            this.mensaje = 'Número de control o contraseña incorrectos.';
+            this.mensajeIncorrecto = true;
           }
         }
-
-
+      },
+      created() {
+        this.fetchData();
       }
-    })
+    });
   </script>
+</body>
+
+</html>
