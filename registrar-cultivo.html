@@ -10,17 +10,17 @@
   <meta content="" name="description">
   <meta content="" name="keywords">
 
-  <!-- Favicons -->
+
   <link href="assets/img/plantaLg.png" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-  <!-- Google Fonts -->
+
   <link href="https://fonts.gstatic.com" rel="preconnect">
   <link
     href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
     rel="stylesheet">
 
-  <!-- Vendor CSS Files -->
+
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
@@ -29,10 +29,8 @@
   <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
 
-  <!-- Template Main CSS File -->
+
   <link href="assets/css/style.css" rel="stylesheet">
-
-
 </head>
 
 <body>
@@ -40,8 +38,6 @@
   <div id="header-container"></div>
   <div id="sidebar-container" style="display: none;"></div>
   <main id="main" class="main">
-
-
     <section class="section">
       <div class="row">
         <div class="col-lg-12">
@@ -49,9 +45,6 @@
           <div class="card">
             <div class="card-body" id="app">
               <h5 class="card-title">Cultivo</h5>
-
-              <!-- General Form Elements-->
-           
                 <div class="row mb-3">
                   <label for="inputText" class="col-sm-2 col-form-label">ID del Cultivo</label>
                   <div class="col-sm-10">
@@ -93,6 +86,79 @@
             <!--End General Form Elements -->
 
           </div>
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Administrar Cultivos</h5>
+
+              <div class="table-responsive">
+                <table class="table datatable">
+                  <thead>
+                    <tr>
+                      <th>Cultivo</th>
+                      <th>Opciones</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      <td>Tomate</td>
+                      <td>
+                        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-pencil-square"></i></button>
+
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Cultivo</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                                <div class="row mb-3">
+                                  <label for="inputText" class="col-sm-2 col-form-label">ID del Cultivo</label>
+                                  <div class="col-sm-10">
+                                    <input type="text" v-model="IdCultivo" class="form-control" id="inputEmail">
+                                  </div>
+                                </div>
+                                <div class="row mb-3">
+                                  <label for="inputText" class="col-sm-2 col-form-label">Nombre del Cultivo</label>
+                                  <div class="col-sm-10">
+                                    <input type="text" v-model="NombreCultivo" class="form-control" id="inputText">
+                                  </div>
+                                </div>
+                                
+                                <div class="row mb-3">
+                                  <label for="inputText" class="col-sm-2 col-form-label">Estatus</label>
+                                  <div class="col-sm-10">
+                                    <input type="text" v-model="Estatus" class="form-control" id="inputText">
+                                  </div>
+                                </div>
+                                <div class="row mb-3">
+                                  <label for="inputDate" class="col-sm-2 col-form-label">Fecha de siembre</label>
+                                  <div class="col-sm-10">
+                                    <input type="date" v-model="FechaSiembra" class="form-control" id="inputDate">
+                                  </div>
+                                </div>
+                                <div class="row mb-3">
+                                  <label for="inputDate" class="col-sm-2 col-form-label">Fecha de cosecha estimada</label>
+                                  <div class="col-sm-10">
+                                    <input type="date" v-model="FechaCosechaEstimada" class="form-control" id="inputDate">
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <button type="button" class="btn btn-outline-danger"><i class="bi bi-trash3-fill"></i></button>
+                      </td>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
         </div>
 
       </div>
@@ -101,12 +167,12 @@
 
     </section>
 
-  </main><!-- End #main -->
+  </main>
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
       class="bi bi-arrow-up-short"></i></a>
 
-  <!-- Vendor JS Files -->
+
   <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="assets/vendor/chart.js/chart.umd.js"></script>
@@ -119,8 +185,6 @@
   <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
 
- 
-  <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
   <script>
     var app = new Vue({
