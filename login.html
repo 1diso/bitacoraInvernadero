@@ -96,6 +96,7 @@
   <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
 
   <script>
+    const input = document.getElementById('numeroControl');
     var app = new Vue({
       el: '#app',
       data: {
@@ -108,7 +109,7 @@
       methods: {
         async fetchData() {
           try {
-            const response = await axios.get('https://localhost:7070/api/Alumno/22360923');
+            const response = await axios.get('https://localhost:7070/api/Alumno/'+input);
             this.alumnos = response.data;
           } catch (error) {
             console.error('Error fetching data:', error);

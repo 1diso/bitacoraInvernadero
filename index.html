@@ -49,7 +49,7 @@
    
         <div class="col-lg-8">
           <div class="row">   
-            <div class="col-xxl-4 col-md-6">
+            <div class="col-12">
               <div id="app">
                 <div class="card-body" v-for="cultivo in cultivos" :key="cultivo.idCultivo">
                   <div class="card">
@@ -60,8 +60,8 @@
                           <img src="assets/img/pepino.png" alt="">
                         </div>
                         <div class="ps-3">
-                          <span class="text-warning small pt-1 fw-bold">Actividades Incompletas</span>
-                          <span class="text-muted small pt-2 ps-1">{{ cultivo.estatus }}</span>
+                          
+                          <span class="text-success medium pt-3 fw-bold">{{ cultivo.estatus }}</span>
                         </div>
                       </div>
                     </div>
@@ -139,39 +139,10 @@
     $("#sidebar-container").load("sidebar.html");
 
     // Retrieve data from localStorage and populate recent activities
-    const actividadesRealizadas = JSON.parse(localStorage.getItem('actividadesRealizadas')) || [];
-    const actividadReciente = document.getElementById('actividadReciente');
 
-    // Sort activities by date and time (most recent first)
-    actividadesRealizadas.sort((a, b) => new Date(b.fecha + ' ' + b.hora) - new Date(a.fecha + ' ' + a.hora));
-
-    // Display recent activities
-    actividadesRealizadas.slice(0, 5).forEach(actividad => {
-      const actividadItem = document.createElement('div');
-      actividadItem.className = 'activity-item d-flex';
-      actividadItem.innerHTML = `
-        <div class="activite-label">${getTimeDifference(new Date(actividad.fecha + ' ' + actividad.hora))}</div>
-        <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
-        <div class="activity-content">
-          ${actividad.actividad} del cultivo ${actividad.cultivo}
-        </div>
-      `;
-      actividadReciente.appendChild(actividadItem);
     });
 
-    function getTimeDifference(date) {
-      const now = new Date();
-      const diffMs = now - date;
-      const diffMins = Math.floor(diffMs / 60000);
-      const diffHrs = Math.floor(diffMins / 60);
-
-      if (diffHrs > 0) {
-        return `${diffHrs} hrs`;
-      } else {
-        return `${diffMins} min`;
-      }
-    }
-  });
+    
 </script>
 </body>
 
